@@ -1,6 +1,6 @@
+from selenium.webdriver.support import expected_conditions as EC
 from pages.base_page import BasePage
-from pages.locators import LoginPageLocators
-from mimesis import Person
+from pages.locators import LoginPageLocators, BasePageLocators
 
 
 class LoginPage(BasePage):
@@ -27,3 +27,4 @@ class LoginPage(BasePage):
         password2.send_keys(password)
         sub = self.browser.find_element(*LoginPageLocators.SUBMIT_BUTTON)
         sub.click()
+        assert EC.element_to_be_clickable(self.browser.find_element(*BasePageLocators.USER_ICON)), "User non-auth"
