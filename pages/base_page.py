@@ -24,7 +24,7 @@ class BasePage():
     def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)
-        except (NoSuchElementException):
+        except NoSuchElementException:
             return False
         return True
 
@@ -43,7 +43,7 @@ class BasePage():
         except NoAlertPresentException:
             print("No second alert presented")
 
-    def is_not_element_present(self, how, what, timeout=4):
+    def is_not_element_present(self, how, what, timeout=2):
         try:
             WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
@@ -57,3 +57,7 @@ class BasePage():
         except TimeoutException:
             return False
         return True
+
+    def go_to_basket_from_header(self, how, what):
+        button = self.browser.find_element(how, what)
+        button.click()
